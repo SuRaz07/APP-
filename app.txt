@@ -1,0 +1,1190 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(FlirtingAndQuotesApp());
+}
+
+class FlirtingAndQuotesApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flirting And Quotes',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  List<String> flirtingTexts = [
+    'Are you a magician? Because whenever I look at you, everyone else disappears.',
+    'Do you have a map? I keep getting lost in your eyes.',
+    'Is your name Google? Because you have everything I’ve been searching for.',
+    'Do you believe in love at first sight, or should I walk by again?',
+    'Is your dad a boxer? Because you’re a knockout.',
+    'I must be a snowflake, because I’ve fallen for you.',
+    'Is your name Wi-Fi? Because I’m feeling a connection.',
+    'If you were a vegetable, you’d be a cute-cumber.',
+    'Is your name Starbucks? Because I like you a latte.',
+    ' "Are you a magician? Because whenever I look at you, everyone else disappears." ',
+' "I think I need a map… I keep getting lost in your eyes." ',
+' "Do you have a Band-Aid? Because I just scraped my knee falling for you." ',
+' "If kisses were snowflakes, I’d send you a blizzard." ',
+' "I was blinded by your beauty… I’m going to need your name and number for insurance purposes." ',
+' "Do you believe in love at first text, or should I send another one?" ',
+' "Are you French? Because Eiffel for you." ',
+' "Are you a parking ticket? Because you’ve got ‘FINE’ written all over you." ',
+' "I must be a snowflake, because I’ve fallen for you." ',
+' "You must be tired because you’ve been running through my mind all day." ',
+' "I’m not a photographer, but I can picture us together." ',
+' "Are you a campfire? Because you’re hot and I want s’more." ',
+' "If I could rearrange the alphabet, I would put U and I together." ',
+' "I think you dropped something: my jaw." ',
+' "You must be made of copper and tellurium, because you’re Cu-Te." ',
+' "I wish I were a cat so I could spend all 9 lives with you." ',
+' "Are you a time traveler? Because I can see you in my future." ',
+' "Do you have a sun? Because you light up my world." ',
+' "Is it hot in here, or is it just you?" ',
+' "I’m not a genie, but I can make your dreams come true." ',
+' "I can’t seem to find my phone number in your contacts... care to add it?" ',
+' "You must be a keyboard, because you’re just my type." ',
+' "You’ve got everything I’ve been searching for, and believe me I am not giving up." ',
+' "If I could rewrite the alphabet, I would put U and I together." ',
+' "Are you a Wi-Fi signal? Because I’m feeling a connection." ',
+' "You must be a magician, because whenever I look at you, everyone else disappears." ',
+' "I’m not a photographer, but I can definitely picture us together." ',
+' "Do you have a pencil? Because I want to draw your attention." ',
+' "You must be tired because you’ve been running through my mind all day." ',
+' "Is your name Chapstick? Because you’re da balm." ',
+' "I’d never play hide and seek with you because someone like you is impossible to find." ',
+' "Do you have a mirror in your pocket? Because I can see myself in your pants." ',
+' "You’re so sweet, you could put Hershey’s out of business." ',
+' "Is your dad a boxer? Because you’re a knockout!" ',
+' "Do you have a map? Because I just got lost in your eyes." ',
+' "Are you from Paris? Because Eiffel for you." ',
+' "Do you have a name, or can I call you mine?" ',
+' "You must be a snowstorm because you’re making my heart race." ',
+' "I must be a snowflake, because I’ve fallen for you." ',
+' "Are you a star? Because your beauty lights up the night." ',
+' "Are you a beaver? Because daaaaam." ',
+' "Can I follow you home? Cause my parents always told me to follow my dreams." ',
+' "Are you a time traveler? Because I see you in my future." ',
+' "Is there an airport nearby or is that just my heart taking off?" ',
+' "You’re like sunshine on a rainy day." ',
+' "I must be dreaming, because you are a dream come true." ',
+' "Do you have a quarter? Because I want to call my mom and tell her I met ‘the one.’" ',
+' "You must be a magician, because every time I look at you, everyone else disappears." ',
+' "I hope you know CPR, because you just took my breath away." ',
+' "Are you an angel? Because heaven is missing one." ',
+' "Do you believe in fate? Because I think we were meant to meet." ',
+' "Are you a snowflake? Because you’re one of a kind." ',
+' "You must be tired because you’ve been running through my mind all day." ',
+' "You must be a magician, because whenever I look at you, I get spellbound." ',
+' "Do you have a sunbeam in your pocket? Because you light up the world." ',
+' "Is it just me or are we destined to be together?" ',
+' "I couldn’t help but notice how beautiful you are, even from across the room." ',
+' "I’d love to be the reason you smile." ',
+' "If I were a cat, I’d spend all 9 lives with you." ',
+' "I couldn’t stop thinking about you if I tried." ',
+' "Are you a dictionary? Because you add meaning to my life." ',
+' "I didn’t believe in love at first sight, but that was before I saw you." ',
+' "You make my heart skip a beat." ',
+' "Are you a light bulb? Because you brighten up my day." ',
+' "I must be a snowflake, because I’ve fallen for you." ',
+' "Is your name Google? Because you have everything I’ve been searching for." ',
+' "You had me at hello." ',
+' "Do you have a pencil? Because I want to write down your number." ',
+' "Are you a camera? Because every time I look at you, I smile." ',
+' "You’ve been running through my mind all day, now you owe me a coffee." ',
+' "I’m not saying you’re the best catch, but you’re definitely the most interesting." ',
+' "You are the reason I have trouble focusing at work." ',
+' "You’ve got the key to my heart." ',
+' "Are you a star? Because your beauty lights up the night." ',
+' "I think you owe me a drink, because when I looked at you, I dropped mine." ',
+' "Your beauty has me lost for words." ',
+' "Are you a mirror? Because I can’t stop looking at you." ',
+' "Are you a parking ticket? Because you’ve got FINE written all over you." ',
+' "I think we’re destined to be together… want to make it happen?" ',
+' "Are you a candy bar? Because you’re sweet and irresistible." ',
+' "I’m sorry, I didn’t catch your name… I’m hoping you’ll tell me over dinner." ',
+' "Can I borrow a pen? I want to write down the moment I met you." ',
+' "Are you the ocean? Because I’m lost at sea." ',
+' "I can’t decide if I’m in love with you or just really in love with your smile." ',
+' "I’m not a photographer, but I can definitely picture us together." ',
+' "Do you have a name, or can I call you mine?" ',
+' "I’m not a photographer, but I can totally picture us together." ',
+    ' "Let’s make some happy memories together, just you and I." ',
+' "You’re pretty much my most favorite of all time in the history of ever." ',
+' "I’ve got a great idea. Let’s make tonight all about you." ',
+' "Because nothing makes me happier and nothing makes me sadder than you." ',
+' "How can one keep getting more and more beautiful every single day? Please tell me so that I can sleep in peace." ',
+' "If I was a girl I would be so jealous of you for your beauty. But I’m a man. How can I stop myself from falling in love with you! How can I not desire you in my sleepless nights?" ',
+' "I wish I was your mirror, so that I could look at you every morning." ',
+' "I can’t stop thinking about how amazing you looked last night. I couldn’t keep my eyes off you." ',
+' "When you kiss me, I feel everything that I’ve been missing." ',
+' "I’ve been yours since the second we met." ',
+' "Never thought I would feel comfortable around such a cocoon but hey! You make me do things I never thought I could have done." ',
+' "You make me laugh so much. I love that about you." ',
+' "Heaven does not always mean a place to be in. Sometimes it’s a person to be with. For me, heaven is being with you all the time!" ',
+' "I’m smiling just thinking about getting to see you later." ',
+' "I love the way you taste." ',
+' "The first time you touched me, I knew I was born to be yours." ',
+' "I look over to you and I see sunshine." ',
+' "You are my dream girl." ',
+' "My heart smiled when you kissed my lips. What a sweet surprise." ',
+' "We just spent the whole day together and you know what? I still want to see you." ',
+' "My day: It starts with the thought of you." ',
+' "You make me smile so effortlessly." ',
+' "Now I’m convinced that cuteness can be a killer. I have injured my heart with your innocence. There’re only two cures for it. Be mine forever or let me be yours forever!" ',
+' "Let’s call in sick and spend the day in bed together." ',
+' "I plan on being with you until forever ends." ',
+' "I will always care for you, even if we’re not together and even if we’re far, far away from each other." ',
+' "Can we be partner in crime? You will steal my heart, and I will steal yours." ',
+' "You make everything blur and outshine even without trying. Are you a goddess, or what? I love how I am so intoxicated by you, bae." ',
+' "Let’s skip the small talk and go straight to flirting." ',
+' "The more I look, the more I find the reasons why you’re the love of my life." ',
+' "They say you only fall in love once, but that can’t be true. Every time I look at you, I fall in love all over again." ',
+' "When I’m with you, I feel like I’m right where I belong." ',
+' "I’m really glad you’re in my life." ',
+' "Every day I fall more in love with you. Except on those days where you really piss me off." ',
+' "Aren’t you tired? You’ve been running in my thoughts the whole day." ',
+' "I wanted to ask you out, but I figured I’d start by sending you a text." ',
+' "“I love you” means that I will love you and stand by you even through the worst of times." ',
+' "I need you right now." ',
+' "Hey, babe! I hope you will not forget to visit me in my dreams and make them colorful. I hope you have a sound sleep, love." ',
+' "I haven’t seen you in forever. Have you been visiting your fellow angels up in Heaven?" ',
+' "Darling, you have my whole heart, forever and always." ',
+' "Falling in love with you reminds me that nothing else matters." ',
+' "My days consist of looking forward to talking with you." ',
+' "I’m much more me when I’m with you." ',
+' "You’re already on my mind, and I’ve only just woken up." ',
+' "My day would’ve been a lot better if I’d gotten to spend time with you." ',
+' "Let’s be honest…you’re the most stunning woman in any room." ',
+' "I don’t want to lose you in my life. You are the stars in my sky and the sun to my world. You are the reason I survive." ',
+' "Just thinking about falling in love with you. I’d do it all over again and again." ',
+' "I wish I could reciprocate more, but I cannot help but keep thinking about you now and then. Have a good day ahead." ',
+' "I will love you when you are a still day. I will love you when you are a hurricane." ',
+' "I think about you a little more than I should." ',
+' "They say that there are no perfect girls, but you come pretty damn close." ',
+' "And then my soul saw you and it kind of went “Oh, there you are, I’ve been looking all over for you.” ',
+' "My name sounds even cuter with your last name added to it." ',
+' "What is one thing you’ve always fantasized about doing in bed? Let me make that happen for you tonight." ',
+' "It is true that my heart always skips a beat when you take my name." ',
+' "Even the purest, strongest heart can melt before the beauty of your face. And I’m not even a saint! I can only stop myself from desiring you when I’m dead!" ',
+' "Thank you for always being my rainbow after the storm." ',
+' "I am sure Aphrodite is jealous of you. You are what they say “divine beauty,” and there is no doubt in it, I promise." ',
+' "My day is not complete if I don’t tell you I love you." ',
+' "Can anything be more valuable than our love? Since you are with me, my only measurement is in heartbeats." ',
+' "My life is perfect because I’m with you." ',
+' "You are forever and always the hero of my heart, the love of my life." ',
+' "It’s funny how big of an impact you have on me. When I see you, you don’t even have to speak. All you can do is smile and it can make my day." ',
+' "Our first kiss is going to be just incredible, don’t you think?" ',
+' "I can never thank you enough for all you do for me and for our family." ',
+' "I want to be the reason why you fall asleep with your phone in your hand." ',
+' "You’re the love of my life and my best friend. I’m so happy that I get to spend the rest of my life with you. I love the ways you find to make me smile every single day. I promise to spend every day trying to make you smile too." ',
+' "Last night was unbelievable. Round two tonight?" ',
+    ' "If I could have any wish, it would be to spend every moment with you." ',
+' "I can’t wait for the day when I can call you mine, forever." ',
+' "Your smile is my favorite thing in the world." ',
+' "You’re the reason I believe in love at first sight." ',
+' "My heart beats for you, and my thoughts are filled with you." ',
+' "Being with you feels like home." ',
+' "I could spend eternity in your arms and never get bored." ',
+' "Every time I see you, I fall in love all over again." ',
+' "You make my heart race in the most beautiful way." ',
+' "You’re my first thought when I wake up and my last thought before I fall asleep." ',
+' "If I could rearrange the stars, I would make them spell out your name." ',
+' "Every moment with you is like a dream come true." ',
+' "You make every ordinary day feel extraordinary." ',
+' "I don’t need a perfect day, just a day with you." ',
+' "I could lose myself in your eyes forever." ',
+' "I’d rather be with you than anywhere else in the world." ',
+' "You have this amazing ability to make my heart skip a beat." ',
+' "If I had a flower for every time I thought of you, I’d have a garden by now." ',
+' "I’ll never stop loving you, not even for a second." ',
+' "Every love song suddenly makes sense when I’m with you." ',
+' "I never knew what true happiness was until I met you." ',
+' "You complete me in ways I never thought were possible." ',
+' "You’re the reason I wake up with a smile every day." ',
+' "I love the way your laughter feels like music to my ears." ',
+' "My favorite place is right next to you." ',
+' "I could spend forever in your arms and never get tired." ',
+' "Just when I think I’m over you, you remind me why I fell in love in the first place." ',
+' "Your presence is all I need to make everything feel right." ',
+' "Your love makes every moment of my life unforgettable." ',
+' "If my heart were a canvas, you’d be the most beautiful painting on it." ',
+' "When I’m with you, I feel like I’m in a fairy tale." ',
+' "No matter where I go, you’re always in my heart." ',
+' "Every second with you is a second well spent." ',
+' "When I hold you close, everything in the world seems perfect." ',
+' "I never knew I could love someone as much as I love you." ',
+' "Being with you is all I could ever ask for." ',
+' "You’re the reason my heart beats faster and slower at the same time." ',
+' "If I could give you one thing, I’d give you the ability to see yourself through my eyes." ',
+' "I can’t help but smile every time I think of you." ',
+' "I never believed in fate until I met you." ',
+' "Being with you feels like magic, it’s a dream come true." ',
+' "You make me feel like the luckiest person in the world." ',
+' "Every time I see you, I feel like I’m falling for you all over again." ',
+' "I feel at peace when I’m wrapped up in your arms." ',
+' "Every moment spent with you feels like a beautiful adventure." ',
+' "You’re the one I want to spend forever with." ',
+' "There’s no place I’d rather be than right here, with you." ',
+' "When I’m with you, I feel complete." ',
+' "I never want to imagine a life without you." ',
+' "You are the love of my life, and I’m so lucky to have you." ',
+' "You’re the reason I believe in soulmates." ',
+' "Every time I see you, my heart feels lighter." ',
+' "I could get lost in your eyes and never want to find my way out." ',
+' "Being close to you feels like everything in the world is right." ',
+    ' "I could spend every day for the rest of my life with you and never get tired of it." ',
+' "You’re the first thing I think about when I wake up and the last thing I think about before I sleep." ',
+' "With you by my side, every moment becomes a beautiful memory." ',
+' "I would follow you to the ends of the earth just to see you smile." ',
+' "You must be a magician, because whenever I look at you, everything else disappears." ',
+' "I never thought I would find someone like you, but now that I have, I never want to let you go." ',
+' "You make my heart skip a beat every time I see you." ',
+' "Every moment spent with you is my new favorite." ',
+' "You’re the reason I smile without even trying." ',
+' "You make my world a whole lot brighter just by being in it." ',
+' "I love the way your laughter sounds—it’s like music to my ears." ',
+' "If I could rearrange the alphabet, I’d put U and I together." ',
+' "Every time I look at you, my heart feels like it’s going to burst with happiness." ',
+' "There’s no one else I’d rather be with than you." ',
+' "I’m not a photographer, but I can definitely picture us together." ',
+' "I must be dreaming because being with you feels too good to be true." ',
+' "If loving you is a crime, I’d be happy to spend the rest of my life in jail." ',
+' "You’re not just the love of my life, you’re the love I never knew I needed." ',
+' "I think you’re the missing puzzle piece I’ve been looking for my whole life." ',
+' "Being with you feels like the best kind of adventure." ',
+' "Every love story is beautiful, but ours is my favorite." ',
+' "Your smile is the one thing that can brighten even my darkest days." ',
+' "You’re my sunshine on cloudy days." ',
+' "You have the kind of beauty that takes my breath away." ',
+' "I want to be the reason you smile every day." ',
+' "The thought of spending forever with you is what keeps me going." ',
+' "I love everything about you—your smile, your laugh, your heart." ',
+' "I can’t imagine my life without you in it." ',
+' "I just want to make you as happy as you make me." ',
+' "Every day with you is a beautiful day I never want to end." ',
+' "You make the ordinary feel extraordinary." ',
+' "I think I’ve found my forever in you." ',
+' "Your eyes are like a beautiful ocean, and I’m drowning in them." ',
+' "The more I get to know you, the more I fall in love with you." ',
+' "You’re everything I’ve been searching for and more." ',
+' "I feel so lucky to have you in my life." ',
+' "When I’m with you, the world feels like it’s standing still." ',
+' "I can’t help but smile every time I think about you." ',
+' "If I had a rose for every time I thought of you, I’d be walking through an entire garden." ',
+' "Every time I hold you close, I never want to let go." ',
+' "I feel like the luckiest person in the world to call you mine." ',
+' "You are my heart’s greatest desire." ',
+' "Your love makes my world brighter every single day." ',
+' "The best part of my day is being with you." ',
+' "You’ve taken my heart, and I never want it back." ',
+' "I just want to hold your hand and never let go." ',
+' "When I’m with you, I feel complete." ',
+' "You’re the most important person in my life, and I can’t imagine a future without you." ',
+' "I love the way you look at me, like I’m the only one in the room." ',
+' "I want to spend every second of every day making you happy." ',
+' "Your smile is the most beautiful thing I’ve ever seen." ',
+' "I can’t wait for the day when I can call you mine forever." ',
+' "You make my heart feel light as a feather." ',
+' "You make everything in my world feel right." ',
+' "I’m not complete without you." ',
+' "Every moment with you feels like the most beautiful dream." ',
+' "When you’re with me, time seems to stand still." ',
+' "Your love is all I need to feel truly alive." ',
+' "The thought of you is the only thing that keeps me going each day." ',
+' "You are the one I’ve been waiting for my whole life." ',
+' "With you, every day is an adventure worth taking." ',
+' "I’ve never felt more alive than when I’m with you." ',
+' "Your beauty takes my breath away every single time I see you." ',
+' "Every time I look at you, I fall in love all over again." ',
+' "If I had to choose between breathing and loving you, I’d use my last breath to tell you I love you." ',
+' "The best thing in my life is knowing that I have you by my side." ',
+' "I never thought I’d find someone like you, but I’m so glad I did." ',
+' "You make my heart skip a beat every time you’re near." ',
+' "I feel at home whenever I’m with you." ',
+' "There’s no place I’d rather be than by your side." ',
+' "I want to be with you forever and never let go." ',
+' "When I’m with you, I feel like I’m exactly where I’m supposed to be." ',
+' "Every time I touch you, I feel sparks flying." ',
+' "Your love is like the sweetest melody I’ve ever heard." ',
+' "I want to be your first thought in the morning and your last thought at night." ',
+' "There’s no one I’d rather be with than you, now and forever." ',
+' "You’re the best part of my day." ',
+' "You have the most beautiful soul I’ve ever encountered." ',
+' "Being with you feels like living a beautiful love story." ',
+' "I can’t wait to spend forever making you as happy as you make me." ',
+' "When I look at you, I see my future." ',
+' "I never thought I could love someone as much as I love you." ',
+' "With you, every day feels like Valentine’s Day." ',
+' "You make my heart race in the best way possible." ',
+' "You’re the most beautiful thing in my world." ',
+' "I would cross oceans just to see your smile." ',
+' "Your happiness is the most important thing to me." ',
+' "I’m addicted to the way you make me feel." ',
+' "I could get lost in your arms and never want to be found." ',
+' "You make me feel like the luckiest person alive." ',
+' "Every time you laugh, it’s like the world gets a little brighter." ',
+' "You’re the reason I smile when I wake up." ',
+' "Being close to you feels like the safest place on earth." ',
+' "I want to spend every moment I can with you." ',
+' "You are the love of my life, and I’m so grateful for you." ',
+' "You make every day feel special." ',
+' "My world is a better place with you in it." ',
+' "You make my heart flutter just by being near me." ',
+' "I feel so lucky to have you in my life." ',
+' "When you’re near, everything feels right." ',
+' "I never want to stop holding your hand." ',
+' "You make my heart feel at home." ',
+' "I just want to make you as happy as you make me." ',
+' "I’m so glad you’re in my life." ',
+' "When I’m with you, I feel complete." ',
+' "I love everything about you, even the way you breathe." ',
+' "You are my everything." ',
+' "You make me want to be a better person." ',
+' "Every moment without you feels like an eternity." ',
+' "You’re the one I want to grow old with." ',
+' "I’ve never been more certain about anything in my life than I am about loving you." ',
+    // Add more flirting texts 
+  ];
+
+  List<String> quotes = [
+     '“The only way to do great work is to love what you do.”',
+    '“In the end, we will remember not the words of our enemies, but the silence of our friends.”',
+    '“The journey of a thousand miles begins with one step.”',
+    '“It always seems impossible until it’s done.”',
+    '“Success is not final, failure is not fatal: It is the courage to continue that counts.” ',
+    '“To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.” ',
+    '“Don’t watch the clock; do what it does. Keep going.” ',
+    '“I am not a product of my circumstances. I am a product of my decisions.” ',
+    '“What lies behind us and what lies before us are tiny matters compared to what lies within us.” ',
+    '“The best way to predict the future is to invent it.” ',
+    ' "Believe in yourself and you’re halfway there." ',
+' "Success doesn’t come to you; you go to it." ',
+' "The harder you work for something, the greater you’ll feel when you achieve it." ',
+' "Don’t stop until you’re proud." ',
+' "Every day is a new beginning. Take a deep breath and start again." ',
+' "Great things never come from comfort zones." ',
+' "Push yourself because no one else is going to do it for you." ',
+' "Your only limit is your mind." ',
+' "Be stronger than your excuses." ',
+' "It always seems impossible until it’s done." ',
+' "Dream big, work hard, make it happen." ',
+' "Do something today that your future self will thank you for." ',
+' "Little by little, one travels far." ',
+' "If you can dream it, you can do it." ',
+' "Success is the sum of small efforts, repeated day in and day out." ',
+' "Believe you can and you are halfway there." ',
+' "Strive for progress, not perfection." ',
+' "The only way to achieve the impossible is to believe it is possible." ',
+' "Success is not the key to happiness. Happiness is the key to success." ',
+' "What you get by achieving your goals is not as important as what you become by achieving your goals." ',
+' "Don’t wait for opportunity. Create it." ',
+' "Success doesn’t just find you. You have to go out and get it." ',
+' "The only limit to our realization of tomorrow is our doubts of today." ',
+' "Act as if what you do makes a difference. It does." ',
+' "You are braver than you believe, stronger than you seem, and smarter than you think." ',
+' "The only way to do great work is to love what you do." ',
+' "Success is not final, failure is not fatal: It is the courage to continue that counts." ',
+' "You don’t have to be great to start, but you have to start to be great." ',
+' "The best way to predict your future is to create it." ',
+' "It does not matter how slowly you go as long as you do not stop." ',
+' "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle." ',
+' "The key to success is to focus on goals, not obstacles." ',
+' "You don’t have to see the whole staircase, just take the first step." ',
+' "The harder you work, the luckier you get." ',
+' "Don’t limit your challenges. Challenge your limits." ',
+' "Everything you’ve ever wanted is on the other side of fear." ',
+' "Don’t watch the clock; do what it does. Keep going." ',
+' "It always seems impossible until it’s done." ',
+' "Success usually comes to those who are too busy to be looking for it." ',
+' "The only place where success comes before work is in the dictionary." ',
+' "Life is what happens when you’re busy making other plans." ',
+' "In the middle of difficulty lies opportunity." ',
+' "Life is 10% what happens to us and 90% how we react to it." ',
+' "Keep your face always toward the sunshine—and shadows will fall behind you." ',
+' "Life isn’t about waiting for the storm to pass, it’s about learning to dance in the rain." ',
+' "The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well." ',
+' "Good friends, good books, and a sleepy conscience: this is the ideal life." ',
+' "The greatest glory in living lies not in never falling, but in rising every time we fall." ',
+' "You have within you right now, everything you need to deal with whatever the world can throw at you." ',
+' "The purpose of life is to live it, to taste experience to the utmost, to reach out eagerly and without fear for newer and richer experiences." ',
+' "Life is really simple, but we insist on making it complicated." ',
+' "You only live once, but if you do it right, once is enough." ',
+' "Life isn’t about finding yourself. Life is about creating yourself." ',
+' "The best way to predict your future is to create it." ',
+' "You don’t have to be rich to live a rich life." ',
+' "The longer I live, the more I realize the impact of attitude on life. Attitude, to me, is more important than facts. It is more important than the past, than education, than money, than circumstances, than failures, than successes, than what other people think or say or do. It is more important than appearance, giftedness, or skill. It will make or break a company…a church…a home. The remarkable thing is we have a choice every day regarding the attitude we will embrace for that day." ',
+' "It’s not how long you live, it’s how well you live." ',
+' "Life is about making an impact, not making an income." ',
+' "I have found that if you love life, life will love you back." ',
+' "Don’t count the days. Make the days count." ',
+    ' "To love and be loved is to feel the sun from both sides." ',
+' "Love is composed of a single soul inhabiting two bodies." ',
+' "The best thing to hold onto in life is each other." ',
+' "You know you’re in love when you can’t fall asleep because reality is finally better than your dreams." ',
+' "Love is not about how many days, months, or years you’ve been together. Love is about how much you love each other every day." ',
+' "True love is not about perfection, it’s about accepting each other’s imperfections." ',
+' "Where there is love there is life." ',
+' "Love the one you’re with." ',
+' "In the end, we will remember not the words of our enemies, but the silence of our friends." ',
+' "Love is not about how much you say ‘I love you’, but how much you prove that it’s true." ',
+' "You don’t love someone because they’re perfect. You love them in spite of the fact that they’re not." ',
+' "To be your friend was all I ever wanted; to be your lover was all I ever dreamed." ',
+' "Love is a many-splendored thing." ',
+' "We are shaped and fashioned by what we love." ',
+' "Love is a promise; love is a souvenir, once given never forgotten, never let it disappear." ',
+' "Love is when the other person’s happiness is more important than your own." ',
+' "You will find as you look back upon your life that the moments that stand out are the moments when you have done things for others." ',
+' "To love is to suffer. To avoid suffering one must not love. But then one suffers from not loving." ',
+' "I have waited for this opportunity for more than half a century, to repeat to you once again my vow of eternal fidelity and everlasting love." ',
+' "Love is when you meet someone who tells you something new about yourself." ',
+    ' "The hardest part of loving someone is knowing when to let go." ',
+' "Sometimes good things fall apart so better things can fall together." ',
+' "It’s hard to forget someone who gave you so much to remember." ',
+' "You may have a broken heart, but you may also be the one who heals it." ',
+' "Don’t cry because it’s over, smile because it happened." ',
+' "The pain of a broken heart is not something you can avoid; you just have to learn to live with it." ',
+' "The broken heart is the most powerful weapon in the world." ',
+' "Don’t wait for the perfect moment. Take the moment and make it perfect." ',
+' "You didn’t come this far to only come this far." ',
+' "The only limit to our realization of tomorrow is our doubts of today." ',
+' "Life isn’t about waiting for the storm to pass, it’s about learning how to dance in the rain." ',
+' "Be the energy you want to attract." ',
+' "Success is not final, failure is not fatal: It is the courage to continue that counts." ',
+' "In the middle of every difficulty lies opportunity." ',
+' "Dream big. Work hard. Stay focused." ',
+' "Don’t be afraid to start over. It’s a chance to rebuild what you want." ',
+' "A goal without a plan is just a wish." ',
+' "Believe you can and you are halfway there." ',
+' "Your only limit is your mind." ',
+' "You are the only one who can limit your greatness." ',
+' "The best time for new beginnings is now." ',
+' "Success doesn’t come from what you do occasionally, it comes from what you do consistently." ',
+' "Doubt kills more dreams than failure ever will." ',
+' "When nothing goes right, go left." ',
+' "Sometimes you have to create your own sunshine." ',
+' "Small daily improvements over time lead to stunning results." ',
+' "Push yourself, because no one else is going to do it for you." ',
+' "Success starts with self-discipline." ',
+' "The harder you work for something, the greater you’ll feel when you achieve it." ',
+' "The future belongs to those who believe in the beauty of their dreams." ',
+' "Your vibe attracts your tribe." ',
+' "Don’t let yesterday take up too much of today." ',
+' "If you want it, work for it." ',
+' "Every day is a second chance." ',
+' "Strive for progress, not perfection." ',
+' "The best way to predict the future is to create it." ',
+' "Don’t just exist, live." ',
+' "Do what you love, and you’ll never work a day in your life." ',
+' "Everything you need is already inside you." ',
+' "Keep going. Everything you need will come to you at the perfect time." ',
+' "You are stronger than you think." ',
+' "Success is the sum of small efforts, repeated day in and day out." ',
+' "You are what you believe yourself to be." ',
+' "Take the risk or lose the chance." ',
+' "Don’t wait for the opportunity, create it." ',
+' "Make today so awesome that yesterday gets jealous." ',
+' "Work hard in silence, let your success be your noise." ',
+' "If you don’t build your dream, someone else will hire you to help them build theirs." ',
+' "Do what you can with all you have, wherever you are." ',
+' "Success doesn’t come from what you do occasionally, it comes from what you do consistently." ',
+' "Start where you are. Use what you have. Do what you can." ',
+' "Opportunities don’t happen, you create them." ',
+' "You will never regret being kind." ',
+' "Good things come to those who hustle." ',
+' "Keep your face always toward the sunshine—and shadows will fall behind you." ',
+' "Nothing worth having comes easy." ',
+' "Inhale confidence. Exhale doubt." ',
+' "Everything you can imagine is real." ',
+' "Success is not how high you have climbed, but how you make a positive difference to the world." ',
+' "Don’t just wait for things to happen. Make them happen." ',
+' "Be a voice, not an echo." ',
+' "Sometimes you have to let go of the life you planned to make room for the life that is waiting for you." ',
+' "Happiness is not something ready-made. It comes from your own actions." ',
+' "The best is yet to come." ',
+' "Don’t let the noise of others’ opinions drown out your own inner voice." ',
+' "It’s not about being the best, it’s about being better than you were yesterday." ',
+' "Life is what happens when you’re busy making other plans." ',
+' "Believe in yourself, and you’ll be unstoppable." ',
+' "Fall in love with taking care of yourself. Mind. Body. Spirit." ',
+' "Never stop doing your best just because someone doesn’t give you credit." ',
+' "When you feel like quitting, think about why you started." ',
+' "Live the life you have imagined." ',
+' "If you want something you’ve never had, you must be willing to do something you’ve never done." ',
+' "Success is not measured by what you accomplish, but by the opposition you have encountered." ',
+' "Start each day with a positive thought and a grateful heart." ',
+' "Good things take time, be patient." ',
+' "Don’t stop when you’re tired. Stop when you’re done." ',
+' "Believe in yourself and you’ll be unstoppable." ',
+' "Work hard in silence, let your success be your noise." ',
+' "Sometimes the smallest step in the right direction ends up being the biggest step of your life." ',
+' "The secret to getting ahead is getting started." ',
+' "You are never too old to set another goal or to dream a new dream." ',
+' "Believe in your dreams, they were given to you for a reason." ',
+' "If you want to fly, you have to give up the things that weigh you down." ',
+' "Life is a journey that must be traveled no matter how bad the roads and accommodations." ',
+' "Dream it. Believe it. Build it." ',
+' "Don’t wait for the perfect moment. Take the moment and make it perfect." ',
+' "You didn’t come this far to only come this far." ',
+' "The only limit to our realization of tomorrow is our doubts of today." ',
+' "Life isn’t about waiting for the storm to pass, it’s about learning how to dance in the rain." ',
+' "Be the energy you want to attract." ',
+' "Success is not final, failure is not fatal: It is the courage to continue that counts." ',
+' "In the middle of every difficulty lies opportunity." ',
+' "Dream big. Work hard. Stay focused." ',
+' "Don’t be afraid to start over. It’s a chance to rebuild what you want." ',
+' "A goal without a plan is just a wish." ',
+' "Believe you can and you are halfway there." ',
+' "Your only limit is your mind." ',
+' "You are the only one who can limit your greatness." ',
+' "The best time for new beginnings is now." ',
+' "Success doesn’t come from what you do occasionally, it comes from what you do consistently." ',
+' "Doubt kills more dreams than failure ever will." ',
+' "When nothing goes right, go left." ',
+' "Sometimes you have to create your own sunshine." ',
+' "Small daily improvements over time lead to stunning results." ',
+' "Push yourself, because no one else is going to do it for you." ',
+' "Success starts with self-discipline." ',
+' "The harder you work for something, the greater you’ll feel when you achieve it." ',
+' "The future belongs to those who believe in the beauty of their dreams." ',
+' "Your vibe attracts your tribe." ',
+' "Don’t let yesterday take up too much of today." ',
+' "If you want it, work for it." ',
+' "Every day is a second chance." ',
+' "Strive for progress, not perfection." ',
+' "The best way to predict the future is to create it." ',
+' "Don’t just exist, live." ',
+' "Do what you love, and you’ll never work a day in your life." ',
+' "Everything you need is already inside you." ',
+' "Keep going. Everything you need will come to you at the perfect time." ',
+' "You are stronger than you think." ',
+' "Success is the sum of small efforts, repeated day in and day out." ',
+' "You are what you believe yourself to be." ',
+' "Take the risk or lose the chance." ',
+' "Don’t wait for the opportunity, create it." ',
+' "Make today so awesome that yesterday gets jealous." ',
+' "Work hard in silence, let your success be your noise." ',
+' "If you don’t build your dream, someone else will hire you to help them build theirs." ',
+' "Do what you can with all you have, wherever you are." ',
+' "Success doesn’t come from what you do occasionally, it comes from what you do consistently." ',
+' "Start where you are. Use what you have. Do what you can." ',
+' "Opportunities don’t happen, you create them." ',
+' "You will never regret being kind." ',
+' "Good things come to those who hustle." ',
+' "Keep your face always toward the sunshine—and shadows will fall behind you." ',
+' "Nothing worth having comes easy." ',
+' "Inhale confidence. Exhale doubt." ',
+' "Everything you can imagine is real." ',
+' "Success is not how high you have climbed, but how you make a positive difference to the world." ',
+' "Don’t just wait for things to happen. Make them happen." ',
+' "Be a voice, not an echo." ',
+' "Sometimes you have to let go of the life you planned to make room for the life that is waiting for you." ',
+' "Happiness is not something ready-made. It comes from your own actions." ',
+' "The best is yet to come." ',
+' "Don’t let the noise of others’ opinions drown out your own inner voice." ',
+' "It’s not about being the best, it’s about being better than you were yesterday." ',
+' "Life is what happens when you’re busy making other plans." ',
+' "Believe in yourself, and you’ll be unstoppable." ',
+' "Fall in love with taking care of yourself. Mind. Body. Spirit." ',
+' "Never stop doing your best just because someone doesn’t give you credit." ',
+' "When you feel like quitting, think about why you started." ',
+' "Live the life you have imagined." ',
+' "If you want something you’ve never had, you must be willing to do something you’ve never done." ',
+' "Success is not measured by what you accomplish, but by the opposition you have encountered." ',
+' "Start each day with a positive thought and a grateful heart." ',
+' "Good things take time, be patient." ',
+' "Don’t stop when you’re tired. Stop when you’re done." ',
+' "Believe in yourself and you’ll be unstoppable." ',
+' "Work hard in silence, let your success be your noise." ',
+' "Sometimes the smallest step in the right direction ends up being the biggest step of your life." ',
+' "The secret to getting ahead is getting started." ',
+' "You are never too old to set another goal or to dream a new dream." ',
+' "Believe in your dreams, they were given to you for a reason." ',
+' "If you want to fly, you have to give up the things that weigh you down." ',
+' "Life is a journey that must be traveled no matter how bad the roads and accommodations." ',
+' "Dream it. Believe it. Build it." ',
+' "The harder you work for something, the greater you’ll feel when you achieve it." ',
+' "If you want to achieve greatness stop asking for permission." ',
+' "You are stronger than you think." ',
+' "Life is tough, but so are you." ',
+' "Do it with passion or not at all." ',
+' "Be the change that you wish to see in the world." ',
+' "Life is what we make it, always has been, always will be." ',
+' "Your only limit is your mind." ',
+' "Be a voice, not an echo." ',
+' "You miss 100% of the shots you don’t take." ',
+' "Don’t count the days, make the days count." ',
+' "Dream as if you’ll live forever, live as if you’ll die today." ',
+' "Wake up with determination. Go to bed with satisfaction." ',
+' "Don’t let the noise of others’ opinions drown out your own inner voice." ',
+' "The future belongs to those who believe in the beauty of their dreams." ',
+' "The only way to do great work is to love what you do." ',
+' "Be not afraid of life. Believe that life is worth living, and your belief will help create the fact." ',
+' "Happiness is not something ready-made. It comes from your own actions." ',
+' "The best time to plant a tree was 20 years ago. The second best time is now." ',
+' "What you get by achieving your goals is not as important as what you become by achieving your goals." ',
+' "Everything you’ve ever wanted is on the other side of fear." ',
+' "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart." ',
+' "The secret to success is to do the common thing uncommonly well." ',
+' "Success is the sum of small efforts, repeated day in and day out." ',
+' "You only live once, but if you do it right, once is enough." ',
+' "It does not matter how slowly you go as long as you do not stop." ',
+' "The only place where success comes before work is in the dictionary." ',
+' "If you want to achieve greatness stop asking for permission." ',
+' "I didn’t come this far to only come this far." ',
+' "When the going gets tough, the tough get going." ',
+' "If it doesn’t challenge you, it won’t change you." ',
+' "Your time is limited, so don’t waste it living someone else’s life." ',
+' "The harder you work for something, the greater you’ll feel when you achieve it." ',
+' "Everything you can imagine is real." ',
+' "Success is the sum of small efforts, repeated day in and day out." ',
+' "If you want to go fast, go alone. If you want to go far, go together." ',
+' "The future belongs to those who believe in the beauty of their dreams." ',
+' "You must be the change you wish to see in the world." ',
+' "There are no shortcuts to any place worth going." ',
+' "Dont watch the clock; do what it does. Keep going." ',
+' "The only way to do great work is to love what you do." ',
+' "The best revenge is massive success." ',
+' "The best way to predict your future is to create it." ',
+' "Don’t just dream about success. Work for it." ',
+' "Great things never come from comfort zones." ',
+' "Don’t watch the clock; do what it does. Keep going." ',
+' "If you want something you’ve never had, you must be willing to do something you’ve never done." ',
+' "Believe you can and you are halfway there." ',
+' "The key to success is to focus on goals, not obstacles." ',
+' "Don’t stop when you’re tired. Stop when you’re done." ',
+' "Opportunities don’t happen, you create them." ',
+' "Success is the result of preparation, hard work, and learning from failure." ',
+' "Don’t limit your challenges. Challenge your limits." ',
+' "The only way to do great work is to love what you do." ',
+' "Success is not the key to happiness. Happiness is the key to success." ',
+' "The only person you are destined to become is the person you decide to be." ',
+' "The way to get started is to quit talking and begin doing." ',
+' "Success is not in what you have, but who you are." ',
+' "Hardships often prepare ordinary people for an extraordinary destiny." ',
+' "Success is not final, failure is not fatal: It is the courage to continue that counts." ',
+' "Everything you can imagine is real." ',
+' "Believe in yourself and all that you are." ',
+' "Success is walking from failure to failure with no loss of enthusiasm." ',
+' "Do not wait to strike till the iron is hot, but make it hot by striking." ',
+' "Don’t be afraid to give up the good to go for the great." ',
+' "The secret of getting ahead is getting started." ',
+' "Be yourself; everyone else is already taken." ',
+' "You are braver than you believe, stronger than you seem, and smarter than you think." ',
+' "Dream big and dare to fail." ',
+' "Your time is limited, don’t waste it living someone else’s life." ',
+' "The best way to predict your future is to create it." ',
+' "If you can dream it, you can do it." ',
+' "Success usually comes to those who are too busy to be looking for it." ',
+' "The only limit to our realization of tomorrow is our doubts of today." ',
+' "Act as if what you do makes a difference. It does." ',
+' "You miss 100% of the shots you don’t take." ',
+' "Dream big, work hard, stay focused." ',
+' "Everything you need is within you." ',
+    // Add more quotes from great personalities
+  ];
+
+  List<String> favoriteFlirtingTexts = [];
+  List<String> favoriteQuotes = [];
+
+  void toggleFavorite(String text, List<String> favorites) {
+    setState(() {
+      if (favorites.contains(text)) {
+        favorites.remove(text);
+      } else {
+        favorites.add(text);
+      }
+    });
+  }
+
+  final List<String> _titles = [
+    'Home',
+    'Flirting Texts',
+    'Quotes',
+    'Favorites',
+    'About'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_titles[_currentIndex]),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Container(
+              height: 80,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Flirting And Quotes',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Favorites'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 3;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('About'),
+              onTap: () {
+                setState(() {
+                  _currentIndex = 4;
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      body: _currentIndex == 0
+          ? HomeSection(onNavBarTapped: (index) => setState(() => _currentIndex = index))
+          : _currentIndex == 1
+              ? FlirtingScreen(
+                  flirtingTexts: flirtingTexts,
+                  favoriteFlirtingTexts: favoriteFlirtingTexts,
+                  toggleFavorite: (text) => toggleFavorite(text, favoriteFlirtingTexts),
+                )
+              : _currentIndex == 2
+                  ? QuotesScreen(
+                      quotes: quotes,
+                      favoriteQuotes: favoriteQuotes,
+                      toggleFavorite: (quote) => toggleFavorite(quote, favoriteQuotes),
+                    )
+                  : _currentIndex == 3
+                      ? FavoriteScreen(
+                          favoriteFlirtingTexts: favoriteFlirtingTexts,
+                          favoriteQuotes: favoriteQuotes,
+                          toggleFavorite: toggleFavorite,
+                        )
+                      : AboutScreen(),
+    );
+  }
+}
+
+class HomeSection extends StatelessWidget {
+  final Function(int) onNavBarTapped;
+
+  HomeSection({required this.onNavBarTapped});
+
+  
+  
+  @override
+Widget build(BuildContext context) {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Welcome to Flirting and Quotes!!',
+          style: TextStyle(
+            fontSize: 20, // Make the text larger
+            fontWeight: FontWeight.bold, 
+          ),
+        ),
+        SizedBox(height: 20), // spacing between the text and the buttons
+        ElevatedButton(
+          onPressed: () => onNavBarTapped(1),
+          child: Text('Flirting Texts'),
+        ),
+        SizedBox(height: 10), // Spacing between buttons
+        ElevatedButton(
+          onPressed: () => onNavBarTapped(2),
+          child: Text('Quotes'),
+        ),
+      ],
+    ),
+  );
+}
+
+}
+
+class FlirtingScreen extends StatelessWidget {
+  final List<String> flirtingTexts;
+  final List<String> favoriteFlirtingTexts;
+  final Function(String) toggleFavorite;
+
+  FlirtingScreen({
+    required this.flirtingTexts,
+    required this.favoriteFlirtingTexts,
+    required this.toggleFavorite,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: flirtingTexts.length,
+      itemBuilder: (context, index) {
+        String text = flirtingTexts[index];
+        bool isFavorite = favoriteFlirtingTexts.contains(text);
+        return ListTile(
+          title: Text(text),
+          trailing: IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            onPressed: () {
+              toggleFavorite(text);
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class QuotesScreen extends StatelessWidget {
+  final List<String> quotes;
+  final List<String> favoriteQuotes;
+  final Function(String) toggleFavorite;
+
+  QuotesScreen({
+    required this.quotes,
+    required this.favoriteQuotes,
+    required this.toggleFavorite,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: quotes.length,
+      itemBuilder: (context, index) {
+        String quote = quotes[index];
+        bool isFavorite = favoriteQuotes.contains(quote);
+        return ListTile(
+          title: Text(quote),
+          trailing: IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            onPressed: () {
+              toggleFavorite(quote);
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class FavoriteScreen extends StatefulWidget {
+  final List<String> favoriteFlirtingTexts;
+  final List<String> favoriteQuotes;
+  final Function(String, List<String>) toggleFavorite;
+
+  FavoriteScreen({
+    required this.favoriteFlirtingTexts,
+    required this.favoriteQuotes,
+    required this.toggleFavorite,
+  });
+
+  @override
+  _FavoriteScreenState createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
+  String selectedType = 'flirting';
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> currentList = selectedType == 'flirting'
+        ? widget.favoriteFlirtingTexts
+        : widget.favoriteQuotes;
+
+    return Column(
+      children: [
+        SizedBox(height: 20), // Added space between the nav bar and buttons
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: selectedType == 'flirting'
+                    ? [
+                        BoxShadow(
+                          color: Color.fromARGB(180, 0, 0, 255),
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                        )
+                      ]
+                    : [],
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectedType = 'flirting';
+                  });
+                },
+                child: Text('Flirting Favorites'),
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: selectedType == 'quotes'
+                    ? [
+                        BoxShadow(
+                          color: Color.fromARGB(180, 0, 0, 255),
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                        )
+                      ]
+                    : [],
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectedType = 'quotes';
+                  });
+                },
+                child: Text('Quotes Favorites'),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: currentList.isEmpty
+              ? Center(child: Text('No favorites added'))
+              : ListView.builder(
+                  itemCount: currentList.length,
+                  itemBuilder: (context, index) {
+                    String item = currentList[index];
+                    return ListTile(
+                      title: Text(item),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          widget.toggleFavorite(item, currentList);
+                        },
+                      ),
+                    );
+                  },
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+class AboutScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'About Us:',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: 'Welcome to ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Flirting and Quotes',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          ', your ultimate destination for charming flirtations and inspirational quotes! Whether you\'re looking to impress someone with a clever line or seeking motivation from the wisdom of great personalities, our app has it all.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Features:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: '- ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Flirting Texts: ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          'Explore a collection of witty and delightful flirting lines to add some charm to your conversations.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              RichText(
+                text: TextSpan(
+                  text: '- ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Inspirational Quotes: ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          'Browse through quotes from some of the most influential personalities across history.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              RichText(
+                text: TextSpan(
+                  text: '- ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Favorites: ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          'Save your favorite flirting texts and quotes for quick access anytime.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              RichText(
+                text: TextSpan(
+                  text: '- ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'User-Friendly Navigation: ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          'Easily switch between sections like Home, Favorites, and About.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Our Mission:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: 'At ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Flirting and Quotes',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text:
+                          ', we aim to bring joy and inspiration to your daily life. With our diverse collection, you can always find something that resonates with you or sparks a meaningful connection with others.',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+                
+                Text( 'Made By:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  text: 'Developed with love and creativity by ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: 'Suraj Paudel.',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+                Text('Contact Us:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'If you have any questions, suggestions, or feedback, feel free to reach out to us at:',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Email: business.surajnp@gmail.com',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
